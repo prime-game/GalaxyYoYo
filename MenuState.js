@@ -1,3 +1,8 @@
+Sentry.init({
+  dsn: 'https://37bd8f5e442c46d097beaae3421077e4@o432870.ingest.sentry.io/5387004',
+  release: 'my-project-name@' + process.env.npm_package_version,
+});
+myUndefinedFunction();
 function MenuState() {
 }
 
@@ -37,13 +42,14 @@ MenuState.prototype.init = function () {
       planeRotationY: -0.444,
       offsetX: -888
     },
-    'multiplayer': {
-      animationProgressTarget: 1,
+     'multiplayer': { // This disables the multiplayer game content <-- TODO
+      /* animationProgressTarget: 1,
       startMenuItemsRotationZ: Math.PI + 0.444,
       planeRotationY: 0.444,
-      offsetX: 888
+      offsetX: 888  */
     }
   };
+  
   this.selectedGameMode = '1-player';
   this.gameModeAnimationProgress = 0;  // between 0 and 1
   this.gameModeTransitionFactor = 0.0666;
@@ -54,7 +60,7 @@ MenuState.prototype.init = function () {
     if (!isNaN(coordinates.x) && coordinates.x < canvas.width / 2) {
       that.selectedGameMode = '1-player';
     } else {
-      that.selectedGameMode = 'multiplayer';
+      //that.selectedGameMode = 'multiplayer';
     }
   };
   this.mouseUpHandler = function(e) {
@@ -78,25 +84,25 @@ MenuState.prototype.startGame = function() {
     SoundManager.transitionFromMenuToMain();
   }
 };
-
+// Text on the menu
 MenuState.prototype.render = function (renderer) {
   this.canvas.width = this.canvas.width;  // Reset canvas
   this.ctx.font = '42px monospace';
   this.ctx.textAlign = 'center';
   this.ctx.fillStyle = 'white';
   this.ctx.fillText('1 player', 550, 820);
-  this.ctx.fillText('2 - 4 players', 1360, 820);
+  //this.ctx.fillText('2 - 4 players', 1360, 820);
 
   this.ctx.save();
   this.ctx.globalAlpha = 0.6;
-  this.ctx.fillText('vs. AI', 550, 880);
-  this.ctx.fillText('Local multiplayer', 1360, 880);
+  this.ctx.fillText('You vs. AI', 550, 880);
+  //this.ctx.fillText('Multiplayer', 1360, 880);
   this.ctx.restore();
 
   this.texture.needsUpdate = true;
   renderer.render(this.scene, this.camera);
 };
-
+// color property: without this B&W
 const menuMaterials = {
   'CurveSingle.014': new THREE.MeshBasicMaterial({color: 0xBFAD0A}),
   'CurveSingle.018': new THREE.MeshBasicMaterial({color: 0xBFAD0A}),

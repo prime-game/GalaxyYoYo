@@ -1,3 +1,3 @@
-# SPLASH JAM
+# Galaxy YoYo
 
 ![Screenshot](screenshot.jpg)
